@@ -1,20 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olivia Klintman</title>
-    <meta name="description" content="Personal website for Olivia Klintman.">
+    <meta name="description" content="Olivia Klintman — skådespelare, dansare och modell. Portfolio.">
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <div class="glow"></div>
-    <main class="container">
-        <h1>Olivia Klintman</h1>
-        <p class="subtitle">minimal portfolio</p>
+    <header class="site-header">
+        <a class="logo" href="index.html">Olivia Klintman</a>
+        <div class="nav-controls">
+            <ul class="nav-links">
+                <li><a href="index.html" aria-current="page" data-i18n="nav.home">Hem</a></li>
+                <li><a href="film.html" data-i18n="nav.film">Film</a></li>
+                <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+                <li><a href="contact.html" data-i18n="nav.contact">Kontakt</a></li>
+            </ul>
+            <div class="lang-toggle" role="group" aria-label="Language">
+                <button type="button" data-lang="sv">SV</button>
+                <button type="button" data-lang="en">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="glow"></div>
+        <div class="hero-inner">
+            <h1>Olivia Klintman</h1>
+            <p class="subtitle" data-i18n="home.subtitle">Skådespelare · Dansare · Modell</p>
+            <p class="hero-intro" data-i18n="home.intro">
+                Olivia Klintman är skådespelare, dansare och modell. Hon spelar huvudrollen i kortfilmen
+                "Blodet vi delar", i regi av Ida Olsson.
+            </p>
+            <div class="hero-cta">
+                <a class="btn btn-primary" href="film.html" data-i18n="home.cta.film">Se filmen</a>
+                <a class="btn" href="gallery.html" data-i18n="home.cta.gallery">Bakom kulisserna</a>
+            </div>
+        </div>
     </main>
+
+    <footer class="site-footer">
+        <span data-i18n="footer.text">Olivia Klintman</span>
+    </footer>
+
+    <script src="main.js"></script>
 </body>
 
 </html>
