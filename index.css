@@ -353,6 +353,7 @@ h1 {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-auto-flow: dense;
     gap: 0.6rem;
 }
 
@@ -374,6 +375,28 @@ h1 {
 
 .gallery-grid button:hover img {
     transform: scale(1.04);
+}
+
+.gallery-grid button.gallery-feature {
+    grid-column: span 2;
+    aspect-ratio: 16 / 9;
+    background: var(--bg-color-alt);
+}
+
+.gallery-grid button.gallery-feature img {
+    object-fit: cover;
+}
+
+.gallery-grid button.gallery-feature.focus-far-left img {
+    object-position: 0%;
+}
+
+.gallery-grid button.gallery-feature.focus-left img {
+    object-position: 20%;
+}
+
+.gallery-grid button.gallery-feature.focus-far-right img {
+    object-position: 100%;
 }
 
 .lightbox {
@@ -418,7 +441,13 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, opacity 0.25s ease;
+}
+
+.lightbox.controls-hidden .lightbox-prev,
+.lightbox.controls-hidden .lightbox-next {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .lightbox-close:hover,
@@ -516,5 +545,16 @@ h1 {
     .lightbox-next {
         width: 2.25rem;
         height: 2.25rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.4rem;
+    }
+
+    .gallery-grid button.gallery-feature {
+        grid-column: span 1;
+        grid-row: span 1;
+        aspect-ratio: 3 / 4;
     }
 }

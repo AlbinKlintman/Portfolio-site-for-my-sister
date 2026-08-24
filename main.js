@@ -96,6 +96,7 @@ function initLightbox() {
 
     function close() {
         lightbox.classList.remove("is-open");
+        lightbox.classList.remove("controls-hidden");
         lightboxImg.src = "";
         document.body.style.overflow = "";
     }
@@ -110,6 +111,41 @@ function initLightbox() {
 
     lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) close();
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoved = false;
+    const SWIPE_THRESHOLD = 40;
+
+    lightboxImg.addEventListener("touchstart", (e) => {
+        const t = e.changedTouches[0];
+        touchStartX = t.clientX;
+        touchStartY = t.clientY;
+        touchMoved = false;
+    }, { passive: true });
+
+    lightboxImg.addEventListener("touchmove", () => {
+        touchMoved = true;
+    }, { passive: true });
+
+    lightboxImg.addEventListener("touchend", (e) => {
+        const t = e.changedTouches[0];
+        const dx = t.clientX - touchStartX;
+        const dy = t.clientY - touchStartY;
+
+        if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+            e.preventDefault();
+            if (dx < 0) show(currentIndex + 1);
+            else show(currentIndex - 1);
+        } else if (!touchMoved) {
+            e.preventDefault();
+            lightbox.classList.toggle("controls-hidden");
+        }
+    }, { passive: false });
+
+    lightboxImg.addEventListener("click", () => {
+        lightbox.classList.toggle("controls-hidden");
     });
 
     document.addEventListener("keydown", (e) => {
