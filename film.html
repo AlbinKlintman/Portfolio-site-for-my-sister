@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Film — Olivia Klintman</title>
-    <meta name="description" content="Blodet vi delar — kortfilm med Olivia Klintman i huvudrollen.">
+    <meta name="description" content="Kortfilmer med Olivia Klintman — Blodet vi delar och kommande projekt.">
     <link rel="stylesheet" href="index.css">
 </head>
 
@@ -16,7 +16,7 @@
             <ul class="nav-links">
                 <li><a href="index.html" data-i18n="nav.home">Hem</a></li>
                 <li><a href="film.html" aria-current="page" data-i18n="nav.film">Film</a></li>
-                <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+                <li><a href="model.html" data-i18n="nav.model">Modell</a></li>
                 <li><a href="contact.html" data-i18n="nav.contact">Kontakt</a></li>
             </ul>
             <div class="lang-toggle" role="group" aria-label="Language">
@@ -28,13 +28,24 @@
 
     <main class="page">
         <div class="page-header">
-            <p data-i18n="film.eyebrow">Kortfilm</p>
-            <h1 data-i18n="film.title">Blodet vi delar</h1>
-            <p data-i18n="film.lead">Olivia Klintman i huvudrollen</p>
+            <p data-i18n="film.eyebrow">Kortfilmer</p>
+            <h1 data-i18n="film.title">Film</h1>
         </div>
 
-        <section class="section">
-            <h2 class="section-title" data-i18n="film.section.film">Filmen</h2>
+        <nav class="page-toc-mobile" aria-label="Sections">
+            <a href="#blodet-vi-delar">Blodet vi delar</a>
+            <a href="#stranden">Stranden</a>
+        </nav>
+
+        <div class="page-layout">
+        <div class="page-content">
+
+        <section class="section" id="blodet-vi-delar">
+            <div class="project-header">
+                <h2 class="section-title">Blodet vi delar</h2>
+                <a class="btn btn-primary" href="gallery.html" data-i18n="film.cta.bts">Bakom kulisserna</a>
+            </div>
+            <p class="project-lead" data-i18n="film.lead">Olivia Klintman i huvudrollen</p>
             <div class="video-wrap">
                 <iframe src="https://www.youtube-nocookie.com/embed/gPGxQidFFfQ"
                     title="Blodet vi delar"
@@ -43,7 +54,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="team">
             <h2 class="section-title" data-i18n="film.section.credits">Team</h2>
             <ul class="credits-list">
                 <li>
@@ -112,6 +123,22 @@
                 </li>
             </ul>
         </section>
+
+        <section class="section" id="stranden">
+            <div class="project-header">
+                <h2 class="section-title">Stranden</h2>
+                <a class="btn btn-primary" href="stranden.html" data-i18n="film.cta.bts">Bakom kulisserna</a>
+            </div>
+            <p class="project-lead" data-i18n="stranden.blurb">En kommande kortfilm i regi av Sixten Degerman.</p>
+        </section>
+
+        </div>
+
+        <nav class="page-toc" aria-label="Sections">
+            <a href="#blodet-vi-delar">Blodet vi delar</a>
+            <a href="#stranden">Stranden</a>
+        </nav>
+        </div>
     </main>
 
     <footer class="site-footer">
