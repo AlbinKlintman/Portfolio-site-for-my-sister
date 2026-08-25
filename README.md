@@ -31,6 +31,7 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 ├── gallery.html          # Behind-the-scenes photo gallery + lightbox
 ├── model.html            # Modeling portfolio — Model House Sweden, Johannes Hjort, Open Call
 ├── stranden.html          # Behind-the-scenes gallery for the upcoming short film "Stranden"
+├── ugc.html               # UGC creator page — embedded TikTok videos by brand
 ├── contact.html          # Contact details
 ├── index.css             # Shared stylesheet for all pages
 ├── main.js                # i18n toggle + lightbox logic (supports multiple grids per page)

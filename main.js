@@ -4,6 +4,7 @@ const translations = {
     "nav.home": { sv: "Hem", en: "Home" },
     "nav.film": { sv: "Film", en: "Film" },
     "nav.model": { sv: "Modell", en: "Model" },
+    "nav.ugc": { sv: "UGC", en: "UGC" },
     "nav.contact": { sv: "Kontakt", en: "Contact" },
 
     "home.subtitle": { sv: "Skådespelare · Dansare · Modell", en: "Actor · Dancer · Model" },
@@ -12,7 +13,6 @@ const translations = {
         en: "Olivia Klintman is an actor, dancer and model. She plays the lead role in the short film “Blodet vi delar” (The Blood We Share), directed by Ida Olsson."
     },
     "home.cta.film": { sv: "Se filmen", en: "Watch the film" },
-    "home.cta.gallery": { sv: "Bakom kulisserna", en: "Behind the scenes" },
 
     "film.eyebrow": { sv: "Kortfilmer", en: "Short Films" },
     "film.title": { sv: "Film", en: "Film" },
@@ -29,6 +29,10 @@ const translations = {
     "model.credit.mhs": { sv: "Foto: Model House Sweden", en: "Photography: Model House Sweden" },
     "model.credit.hjort": { sv: "Foto: Johannes Hjort", en: "Photography: Johannes Hjort" },
 
+    "ugc.eyebrow": { sv: "Portfolio", en: "Portfolio" },
+    "ugc.title": { sv: "UGC Creator", en: "UGC Creator" },
+    "ugc.views": { sv: "visningar", en: "views" },
+
     "stranden.eyebrow": { sv: "Kommande kortfilm", en: "Upcoming Short Film" },
     "stranden.title": { sv: "Stranden", en: "Stranden" },
     "stranden.blurb": {
@@ -44,9 +48,7 @@ const translations = {
     "contact.title": { sv: "Kom i kontakt", en: "Get in touch" },
     "contact.intro": { sv: "För bokningar och samarbeten, hör av dig via e-post eller Instagram.", en: "For bookings and collaborations, reach out via email or Instagram." },
     "contact.label.email": { sv: "E-post", en: "Email" },
-    "contact.label.instagram": { sv: "Instagram", en: "Instagram" },
-
-    "footer.text": { sv: "Olivia Klintman", en: "Olivia Klintman" }
+    "contact.label.instagram": { sv: "Instagram", en: "Instagram" }
 };
 
 const LANG_KEY = "olivia-lang";
