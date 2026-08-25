@@ -12,7 +12,10 @@
 <body>
     <header class="site-header">
         <a class="logo" href="index.html">Olivia Klintman</a>
-        <div class="nav-controls">
+        <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-controls" id="site-nav">
             <ul class="nav-links">
                 <li><a href="index.html" data-i18n="nav.home">Hem</a></li>
                 <li><a href="film.html" data-i18n="nav.film">Film</a></li>

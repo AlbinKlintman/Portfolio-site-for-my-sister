@@ -126,6 +126,40 @@ img {
     border-color: var(--text-color);
 }
 
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 1.35rem;
+    height: 1.5px;
+    background: var(--text-color);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
 /* ---------- Hero (home) ---------- */
 
 .hero {
@@ -731,14 +765,15 @@ h1 {
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.contact-link .contact-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent-color);
+.contact-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+    color: var(--text-color);
 }
 
 .contact-link .contact-value {
@@ -779,14 +814,46 @@ h1 {
 
 @media (max-width: 640px) {
     .site-header {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .nav-toggle {
+        display: flex;
     }
 
     .nav-controls {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        padding: 1.5rem clamp(1.25rem, 5vw, 3rem) 1.75rem;
+        background: rgba(12, 12, 12, 0.97);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .nav-controls.is-open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.1rem;
+    }
+
+    .lang-toggle {
         justify-content: center;
-        flex-wrap: wrap;
     }
 
     .credits-list li {

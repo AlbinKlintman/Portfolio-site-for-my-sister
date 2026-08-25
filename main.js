@@ -84,6 +84,36 @@ function initLangToggle() {
     });
 }
 
+// ---------- Mobile nav toggle ----------
+
+function initNavToggle() {
+    const toggle = document.querySelector(".nav-toggle");
+    const controls = document.querySelector(".nav-controls");
+    if (!toggle || !controls) return;
+
+    const closeMenu = () => {
+        controls.classList.remove("is-open");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+    };
+
+    toggle.addEventListener("click", () => {
+        const isOpen = controls.classList.toggle("is-open");
+        toggle.classList.toggle("is-open", isOpen);
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    controls.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!controls.classList.contains("is-open")) return;
+        if (controls.contains(e.target) || toggle.contains(e.target)) return;
+        closeMenu();
+    });
+}
+
 // ---------- Lightbox (gallery page) ----------
 
 function initLightbox() {
@@ -228,6 +258,7 @@ function initBackToTop() {
 
 document.addEventListener("DOMContentLoaded", () => {
     initLangToggle();
+    initNavToggle();
     initLightbox();
     initPageToc();
     initBackToTop();
