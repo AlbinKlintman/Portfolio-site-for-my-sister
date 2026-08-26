@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap');
-
 :root {
     --bg-color: #0c0c0c;
     --bg-color-alt: #131313;
@@ -608,6 +606,23 @@ h1 {
     margin-bottom: 0;
 }
 
+.art-subsection-header {
+    text-align: center;
+    margin: clamp(3rem, 6vw, 4.5rem) 0 clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.art-subsection-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+}
+
+.art-subsection-header .gallery-credit {
+    margin-bottom: 0;
+}
+
 .gallery-grid.art-style {
     display: block;
     column-width: 280px;
@@ -749,6 +764,75 @@ h1 {
     letter-spacing: 0.05em;
     color: var(--text-color);
     white-space: nowrap;
+}
+
+.ugc-play {
+    all: unset;
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    cursor: pointer;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-color-alt);
+}
+
+.ugc-iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-color-alt);
+    border: none;
+}
+
+.ugc-play picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ugc-play img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.ugc-play:hover img {
+    transform: scale(1.04);
+    opacity: 0.9;
+}
+
+.ugc-play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(12, 12, 12, 0.55);
+    backdrop-filter: blur(4px);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.ugc-play-icon svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    color: var(--text-color);
+    margin-left: 0.15rem;
+}
+
+.ugc-play:hover .ugc-play-icon {
+    background: rgba(12, 12, 12, 0.75);
+    transform: translate(-50%, -50%) scale(1.08);
 }
 
 /* ---------- Contact ---------- */

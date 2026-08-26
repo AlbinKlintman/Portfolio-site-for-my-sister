@@ -8,9 +8,10 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 
 - **Bilingual UI (SV/EN)** — a single translation dictionary drives every page via `data-i18n` attributes; the chosen language persists across visits with `localStorage`.
 - **Custom photo gallery with lightbox** — a responsive grid of behind-the-scenes stills with a dependency-free, keyboard-navigable lightbox (prev/next, `Esc` to close).
-- **Image optimization pipeline** — full-resolution originals are kept alongside generated thumbnails (~1000px, compressed), so the gallery grid stays fast while the lightbox still loads full quality on demand.
+- **Image optimization pipeline** — full-resolution originals are kept alongside generated thumbnails (~1000px, compressed, WebP with a JPEG fallback via `<picture>`), so the gallery grid stays fast while the lightbox still loads full quality on demand.
 - **Responsive, accessible layout** — CSS Grid/Flexbox throughout, mobile-friendly nav, semantic markup, `aria-current` for active nav state.
 - **Embedded video** — privacy-enhanced YouTube embeds (`youtube-nocookie.com`) for the film.
+- **Performance-conscious loading** — Google Fonts loaded via `<link rel="preconnect">` instead of a render-blocking CSS `@import`; every gallery image ships explicit `width`/`height` so the layout doesn't shift as lazy images load in; TikTok videos on the UGC page are click-to-play facades (a static local thumbnail + play button) — nothing loads until clicked, and each click builds its own isolated `<iframe srcdoc="...">` running TikTok's official blockquote + `embed.js` widget in a fresh browsing context, so every video gets a genuine first-load mount (required for the ad/Spark Ads content these are) with no state shared between videos.
 - **Zero build tooling** — plain HTML/CSS/JS, so the entire site is just static files with no compile step, deployable anywhere.
 
 ## Tech Stack
@@ -36,7 +37,8 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 ├── index.css             # Shared stylesheet for all pages
 ├── main.js                # i18n toggle + lightbox logic (supports multiple grids per page)
 ├── Images/                # Full-resolution photography, grouped by shoot/source folder
-│   └── <folder>/thumbs/   # Per-folder generated, compressed thumbnails for the grid
+│   ├── <folder>/thumbs/   # Per-folder generated, compressed thumbnails for the grid
+│   └── ugc-thumbs/        # Locally saved TikTok cover images for the click-to-play facades
 └── .github/workflows/
     └── static.yml          # GitHub Actions workflow: deploys repo root to GitHub Pages
 ```
@@ -51,13 +53,24 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-To regenerate gallery thumbnails after adding new photos to an `Images/<folder>/`:
+To regenerate gallery thumbnails after adding new photos to an `Images/<folder>/` (produces both the JPEG and its WebP counterpart):
 
 ```bash
 mkdir -p "Images/<folder>/thumbs"
 for f in Images/<folder>/*.jpg; do
-  convert "$f" -auto-orient -resize '1000x1000>' -strip -quality 78 "Images/<folder>/thumbs/$(basename "$f")"
+  name="$(basename "$f")"
+  convert "$f" -auto-orient -resize '1000x1000>' -strip -quality 78 "Images/<folder>/thumbs/$name"
+  convert "$f" -auto-orient -resize '1000x1000>' -strip -quality 78 "Images/<folder>/thumbs/${name%.*}.webp"
 done
+```
+
+Each gallery `<img>` should then be wrapped in a `<picture>` with a WebP `<source>` before the JPEG fallback:
+
+```html
+<picture>
+    <source srcset="Images/<folder>/thumbs/photo.webp" type="image/webp">
+    <img src="Images/<folder>/thumbs/photo.jpg" alt="..." loading="lazy">
+</picture>
 ```
 
 ## Deployment

@@ -26,12 +26,24 @@ const translations = {
 
     "model.eyebrow": { sv: "Portfolio", en: "Portfolio" },
     "model.title": { sv: "Modell", en: "Model" },
-    "model.credit.mhs": { sv: "Foto: Model House Sweden", en: "Photography: Model House Sweden" },
+    "model.order-note": {
+        sv: "Kategorierna är sorterade efter datum, senaste överst",
+        en: "Categories are sorted by date, newest first"
+    },
+    "model.date.opencall": { sv: "4 juli 2026", en: "4 July 2026" },
+    "model.credit.mhs": {
+        sv: "Foto: Model House Sweden — 14 juni 2026",
+        en: "Photography: Model House Sweden — 14 June 2026"
+    },
     "model.credit.hjort": { sv: "Foto: Johannes Hjort", en: "Photography: Johannes Hjort" },
+    "model.date.hjort.couture-photos": { sv: "12 februari 2026", en: "12 February 2026" },
+    "model.date.hjort.couture-polaroids": { sv: "12 februari 2026", en: "12 February 2026" },
+    "model.date.hjort.kejsaren": { sv: "15 november 2025", en: "15 November 2025" },
 
     "ugc.eyebrow": { sv: "Portfolio", en: "Portfolio" },
     "ugc.title": { sv: "UGC Creator", en: "UGC Creator" },
     "ugc.views": { sv: "visningar", en: "views" },
+    "ugc.play": { sv: "Spela upp video", en: "Play video" },
 
     "stranden.eyebrow": { sv: "Kommande kortfilm", en: "Upcoming Short Film" },
     "stranden.title": { sv: "Stranden", en: "Stranden" },
@@ -64,6 +76,13 @@ function applyTranslations(lang) {
         const entry = translations[key];
         if (entry && entry[lang]) {
             el.textContent = entry[lang];
+        }
+    });
+    document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+        const key = el.getAttribute("data-i18n-aria");
+        const entry = translations[key];
+        if (entry && entry[lang]) {
+            el.setAttribute("aria-label", entry[lang]);
         }
     });
     document.querySelectorAll(".lang-toggle button").forEach((btn) => {
@@ -256,10 +275,48 @@ function initBackToTop() {
     });
 }
 
+// ---------- TikTok embeds (UGC page) ----------
+// Every card shows a static thumbnail with a play button. Nothing from
+// TikTok loads until that button is clicked. On click, each video gets
+// its own isolated iframe (via srcdoc) running TikTok's official
+// blockquote + embed.js widget. Running it in its own fresh browsing
+// context — rather than injecting embed.js into our page, shared across
+// every video — means it's always a first-time execution as far as
+// TikTok's script is concerned, with no state shared between videos to
+// race against. Ad (Spark Ads) content in particular seems to need that
+// official first-load flow to unlock playback; a bare iframe pointed
+// straight at the player URL loads the UI but won't actually play ads.
+
+function initUgcEmbeds() {
+    document.querySelectorAll(".ugc-play").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const videoId = btn.dataset.videoId;
+            const author = btn.dataset.author;
+            if (!videoId || !author) return;
+
+            const iframe = document.createElement("iframe");
+            iframe.className = "ugc-iframe";
+            iframe.allow = "autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen";
+            iframe.allowFullscreen = true;
+            iframe.srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+                <style>body{margin:0;background:#0c0c0c;display:flex;align-items:center;justify-content:center;min-height:100vh;}</style>
+                </head><body>
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${author}/video/${videoId}" data-video-id="${videoId}" style="max-width:325px;min-width:325px;">
+                    <section></section>
+                </blockquote>
+                <script async src="https://www.tiktok.com/embed.js"></script>
+                </body></html>`;
+
+            btn.replaceWith(iframe);
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     initLangToggle();
     initNavToggle();
     initLightbox();
     initPageToc();
     initBackToTop();
+    initUgcEmbeds();
 });
