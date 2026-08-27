@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC Embed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0c0c0c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const videoId = params.get("id");
+        const author = params.get("author");
+
+        if (videoId && author) {
+            const blockquote = document.createElement("blockquote");
+            blockquote.className = "tiktok-embed";
+            blockquote.setAttribute("cite", `https://www.tiktok.com/@${author}/video/${videoId}`);
+            blockquote.setAttribute("data-video-id", videoId);
+            blockquote.style.maxWidth = "325px";
+            blockquote.style.minWidth = "325px";
+            blockquote.innerHTML = "<section></section>";
+            document.body.appendChild(blockquote);
+
+            const script = document.createElement("script");
+            script.async = true;
+            script.src = "https://www.tiktok.com/embed.js";
+            document.body.appendChild(script);
+        }
+    </script>
+</body>
+
+</html>

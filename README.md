@@ -11,7 +11,7 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 - **Image optimization pipeline** — full-resolution originals are kept alongside generated thumbnails (~1000px, compressed, WebP with a JPEG fallback via `<picture>`), so the gallery grid stays fast while the lightbox still loads full quality on demand.
 - **Responsive, accessible layout** — CSS Grid/Flexbox throughout, mobile-friendly nav, semantic markup, `aria-current` for active nav state.
 - **Embedded video** — privacy-enhanced YouTube embeds (`youtube-nocookie.com`) for the film.
-- **Performance-conscious loading** — Google Fonts loaded via `<link rel="preconnect">` instead of a render-blocking CSS `@import`; every gallery image ships explicit `width`/`height` so the layout doesn't shift as lazy images load in; TikTok videos on the UGC page are click-to-play facades (a static local thumbnail + play button) — nothing loads until clicked, and each click builds its own isolated `<iframe srcdoc="...">` running TikTok's official blockquote + `embed.js` widget in a fresh browsing context, so every video gets a genuine first-load mount (required for the ad/Spark Ads content these are) with no state shared between videos.
+- **Performance-conscious loading** — Google Fonts loaded via `<link rel="preconnect">` instead of a render-blocking CSS `@import`; every gallery image ships explicit `width`/`height` so the layout doesn't shift as lazy images load in; TikTok videos on the UGC page are click-to-play facades (a static local thumbnail + play button) — nothing loads until clicked, and each click points an iframe at `ugc-embed.html` (a real page, not `srcdoc` — that gives an iframe an opaque "null" origin some third-party scripts mishandle), which mounts TikTok's official blockquote + `embed.js` widget in its own fresh browsing context, so every video gets a genuine first-load mount with no state shared between videos.
 - **Zero build tooling** — plain HTML/CSS/JS, so the entire site is just static files with no compile step, deployable anywhere.
 
 ## Tech Stack
@@ -33,6 +33,7 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 ├── model.html            # Modeling portfolio — Model House Sweden, Johannes Hjort, Open Call
 ├── stranden.html          # Behind-the-scenes gallery for the upcoming short film "Stranden"
 ├── ugc.html               # UGC creator page — embedded TikTok videos by brand
+├── ugc-embed.html          # Standalone helper page each UGC video's iframe loads (mounts TikTok's embed.js in its own isolated context)
 ├── contact.html          # Contact details
 ├── index.css             # Shared stylesheet for all pages
 ├── main.js                # i18n toggle + lightbox logic (supports multiple grids per page)

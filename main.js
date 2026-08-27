@@ -278,14 +278,13 @@ function initBackToTop() {
 // ---------- TikTok embeds (UGC page) ----------
 // Every card shows a static thumbnail with a play button. Nothing from
 // TikTok loads until that button is clicked. On click, each video gets
-// its own isolated iframe (via srcdoc) running TikTok's official
-// blockquote + embed.js widget. Running it in its own fresh browsing
-// context — rather than injecting embed.js into our page, shared across
-// every video — means it's always a first-time execution as far as
-// TikTok's script is concerned, with no state shared between videos to
-// race against. Ad (Spark Ads) content in particular seems to need that
-// official first-load flow to unlock playback; a bare iframe pointed
-// straight at the player URL loads the UI but won't actually play ads.
+// its own iframe pointed at ugc-embed.html?id=...&author=..., a small
+// standalone page that mounts TikTok's official blockquote + embed.js
+// widget. Loading it as a real page (not srcdoc, which gives the iframe
+// an opaque "null" origin some third-party scripts don't handle well)
+// keeps each video in its own fresh browsing context — a genuine
+// first-time execution as far as TikTok's script is concerned, with no
+// state shared between videos to race against.
 
 function initUgcEmbeds() {
     document.querySelectorAll(".ugc-play").forEach((btn) => {
@@ -298,14 +297,7 @@ function initUgcEmbeds() {
             iframe.className = "ugc-iframe";
             iframe.allow = "autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen";
             iframe.allowFullscreen = true;
-            iframe.srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-                <style>body{margin:0;background:#0c0c0c;display:flex;align-items:center;justify-content:center;min-height:100vh;}</style>
-                </head><body>
-                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${author}/video/${videoId}" data-video-id="${videoId}" style="max-width:325px;min-width:325px;">
-                    <section></section>
-                </blockquote>
-                <script async src="https://www.tiktok.com/embed.js"></script>
-                </body></html>`;
+            iframe.src = `ugc-embed.html?id=${encodeURIComponent(videoId)}&author=${encodeURIComponent(author)}`;
 
             btn.replaceWith(iframe);
         });
