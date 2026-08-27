@@ -60,7 +60,15 @@ const translations = {
     "contact.title": { sv: "Kom i kontakt", en: "Get in touch" },
     "contact.intro": { sv: "För bokningar och samarbeten, hör av dig via e-post eller Instagram.", en: "For bookings and collaborations, reach out via email or Instagram." },
     "contact.label.email": { sv: "E-post", en: "Email" },
-    "contact.label.instagram": { sv: "Instagram", en: "Instagram" }
+    "contact.label.instagram": { sv: "Instagram", en: "Instagram" },
+
+    "notfound.eyebrow": { sv: "404", en: "404" },
+    "notfound.title": { sv: "Sidan kunde inte hittas", en: "Page not found" },
+    "notfound.intro": {
+        sv: "Sidan du letar efter finns inte, eller så har den flyttats.",
+        en: "The page you're looking for doesn't exist, or it's been moved."
+    },
+    "notfound.cta": { sv: "Till startsidan", en: "Back to home" }
 };
 
 const LANG_KEY = "olivia-lang";
