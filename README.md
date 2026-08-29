@@ -1,6 +1,6 @@
 # Olivia Klintman — Portfolio Site
 
-A multi-page portfolio website built for an actor/dancer/model, showcasing her lead role in the short film *Blodet vi delar*. Static HTML/CSS/JS, no framework or build step, deployed automatically to GitHub Pages via GitHub Actions.
+A multi-page portfolio website for Olivia Klintman — dancer, actor, UGC creator and model. Covers her lead role in the short film *Blodet vi delar*, an upcoming short film *Stranden*, modeling work, and branded UGC/TikTok content. Static HTML/CSS/JS, no framework or build step, deployed automatically to GitHub Pages via GitHub Actions.
 
 **Live site:** https://albinklintman.github.io/Portfolio-site-for-my-sister/
 
@@ -11,7 +11,10 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 - **Image optimization pipeline** — full-resolution originals are kept alongside generated thumbnails (~1000px, compressed, WebP with a JPEG fallback via `<picture>`), so the gallery grid stays fast while the lightbox still loads full quality on demand.
 - **Responsive, accessible layout** — CSS Grid/Flexbox throughout, mobile-friendly nav, semantic markup, `aria-current` for active nav state.
 - **Embedded video** — privacy-enhanced YouTube embeds (`youtube-nocookie.com`) for the film.
-- **Performance-conscious loading** — Google Fonts loaded via `<link rel="preconnect">` instead of a render-blocking CSS `@import`; every gallery image ships explicit `width`/`height` so the layout doesn't shift as lazy images load in; TikTok videos on the UGC page are click-to-play facades (a static local thumbnail + play button) — nothing loads until clicked, and each click points an iframe at `ugc-embed.html` (a real page, not `srcdoc` — that gives an iframe an opaque "null" origin some third-party scripts mishandle), which mounts TikTok's official blockquote + `embed.js` widget in its own fresh browsing context, so every video gets a genuine first-load mount with no state shared between videos.
+- **Performance-conscious loading** — fonts are self-hosted (`fonts/*.woff2` + `@font-face` in index.css, no Google Fonts request at all); every gallery image ships explicit `width`/`height` so the layout doesn't shift as lazy images load in; TikTok videos on the UGC page are click-to-play facades (a static local thumbnail + play button) — nothing loads until clicked, and each click points an iframe at `ugc-embed.html` (a real page, not `srcdoc` — that gives an iframe an opaque "null" origin some third-party scripts mishandle), which mounts TikTok's official blockquote + `embed.js` widget in its own fresh browsing context, so every video gets a genuine first-load mount with no state shared between videos.
+- **SEO / social sharing** — every page has a unique `<title>`/description, Open Graph + Twitter Card tags with a branded share image (`og-image.png`), and a favicon (`favicon.ico` + `apple-touch-icon.png`). Gallery photos have individually written, descriptive alt text (not a repeated generic string) for accessibility and search indexing.
+- **Privacy-friendly analytics** — [GoatCounter](https://www.goatcounter.com/) (`klintman.goatcounter.com`), a lightweight cookie-free tracker that shows page views, referrers, and visitor country without storing personal data or needing a cookie-consent banner.
+- **Custom 404 page** (`404.html`) — GitHub Pages serves this automatically for any unmatched URL, styled to match the rest of the site.
 - **Zero build tooling** — plain HTML/CSS/JS, so the entire site is just static files with no compile step, deployable anywhere.
 
 ## Tech Stack
@@ -21,6 +24,8 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 | Markup / styling | Semantic HTML5, hand-written CSS (custom properties, Grid/Flexbox) |
 | Interactivity | Vanilla JavaScript (i18n toggle, lightbox) — no framework |
 | Image processing | ImageMagick, for generating compressed gallery thumbnails |
+| Fonts | Self-hosted woff2 (Cormorant Garamond, Inter), no external font requests |
+| Analytics | [GoatCounter](https://www.goatcounter.com/), cookie-free, no consent banner needed |
 | CI/CD | GitHub Actions → GitHub Pages, auto-deploys on every push to `main` |
 
 ## Project Structure
@@ -35,8 +40,13 @@ A multi-page portfolio website built for an actor/dancer/model, showcasing her l
 ├── ugc.html               # UGC creator page — embedded TikTok videos by brand
 ├── ugc-embed.html          # Standalone helper page each UGC video's iframe loads (mounts TikTok's embed.js in its own isolated context)
 ├── contact.html          # Contact details
+├── 404.html               # Custom not-found page, auto-served by GitHub Pages
 ├── index.css             # Shared stylesheet for all pages
 ├── main.js                # i18n toggle + lightbox logic (supports multiple grids per page)
+├── favicon.ico            # Multi-size favicon
+├── apple-touch-icon.png   # iOS home-screen icon
+├── og-image.png           # Shared Open Graph / Twitter Card image
+├── fonts/                 # Self-hosted woff2 files (Cormorant Garamond, Inter — both variable fonts)
 ├── Images/                # Full-resolution photography, grouped by shoot/source folder
 │   ├── <folder>/thumbs/   # Per-folder generated, compressed thumbnails for the grid
 │   └── ugc-thumbs/        # Locally saved TikTok cover images for the click-to-play facades

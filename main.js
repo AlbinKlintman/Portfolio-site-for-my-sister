@@ -7,10 +7,10 @@ const translations = {
     "nav.ugc": { sv: "UGC", en: "UGC" },
     "nav.contact": { sv: "Kontakt", en: "Contact" },
 
-    "home.subtitle": { sv: "Skådespelare · Dansare · Modell", en: "Actor · Dancer · Model" },
+    "home.subtitle": { sv: "Dansare · Skådespelare · UGC Kreatör · Modell", en: "Dancer · Actor · UGC Creator · Model" },
     "home.intro": {
-        sv: "Olivia Klintman är skådespelare, dansare och modell. Hon spelar huvudrollen i kortfilmen “Blodet vi delar”, i regi av Ida Olsson.",
-        en: "Olivia Klintman is an actor, dancer and model. She plays the lead role in the short film “Blodet vi delar” (The Blood We Share), directed by Ida Olsson."
+        sv: "Olivia Klintman är dansare, skådespelare, UGC kreatör och modell.",
+        en: "Olivia Klintman is a dancer, actor, UGC creator and model."
     },
     "home.cta.film": { sv: "Se filmen", en: "Watch the film" },
 
@@ -41,7 +41,7 @@ const translations = {
     "model.date.hjort.kejsaren": { sv: "15 november 2025", en: "15 November 2025" },
 
     "ugc.eyebrow": { sv: "Portfolio", en: "Portfolio" },
-    "ugc.title": { sv: "UGC Creator", en: "UGC Creator" },
+    "ugc.title": { sv: "UGC Kreatör", en: "UGC Creator" },
     "ugc.views": { sv: "visningar", en: "views" },
     "ugc.play": { sv: "Spela upp video", en: "Play video" },
 
