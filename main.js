@@ -19,6 +19,8 @@ const translations = {
     "film.lead": { sv: "Olivia Klintman i huvudrollen", en: "Olivia Klintman in the lead role" },
     "film.section.credits": { sv: "Team", en: "Credits" },
     "film.cta.bts": { sv: "Bakom kulisserna", en: "Behind the Scenes" },
+    "film.cta.bts.blodet": { sv: "Bakom kulisserna – Blodet vi delar", en: "Behind the Scenes – Blodet vi delar" },
+    "film.cta.bts.stranden": { sv: "Bakom kulisserna – Stranden", en: "Behind the Scenes – Stranden" },
 
     "gallery.eyebrow": { sv: "Galleri", en: "Gallery" },
     "gallery.title": { sv: "Bakom kulisserna", en: "Behind the Scenes" },
@@ -312,6 +314,27 @@ function initUgcEmbeds() {
     });
 }
 
+// ---------- YouTube embed facade (film page) ----------
+// The video starts as a static thumbnail with a play button; the real
+// YouTube iframe (and its ~1MB of player JS/CSS) only loads once clicked.
+
+function initVideoFacades() {
+    document.querySelectorAll(".video-facade").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const videoId = btn.dataset.videoId;
+            if (!videoId) return;
+
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1`;
+            iframe.title = btn.dataset.videoTitle || "";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+
+            btn.replaceWith(iframe);
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     initLangToggle();
     initNavToggle();
@@ -319,4 +342,5 @@ document.addEventListener("DOMContentLoaded", () => {
     initPageToc();
     initBackToTop();
     initUgcEmbeds();
+    initVideoFacades();
 });

@@ -17,6 +17,7 @@
     <meta name="twitter:title" content="Film — Olivia Klintman">
     <meta name="twitter:description" content="Kortfilmer med Olivia Klintman — Blodet vi delar och kommande projekt.">
     <meta name="twitter:image" content="https://olivialeeklintman.com/og-image.png">
+    <link rel="preload" href="fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="index.css">
 </head>
 
@@ -58,14 +59,16 @@
         <section class="section" id="blodet-vi-delar">
             <div class="project-header">
                 <h2 class="section-title">Blodet vi delar</h2>
-                <a class="btn btn-primary" href="gallery.html" data-i18n="film.cta.bts">Bakom kulisserna</a>
+                <a class="btn btn-primary" href="blodet-vi-delar.html" data-i18n="film.cta.bts" data-i18n-aria="film.cta.bts.blodet" aria-label="Bakom kulisserna – Blodet vi delar">Bakom kulisserna</a>
             </div>
             <p class="project-lead" data-i18n="film.lead">Olivia Klintman i huvudrollen</p>
             <div class="video-wrap">
-                <iframe src="https://www.youtube-nocookie.com/embed/gPGxQidFFfQ"
-                    title="Blodet vi delar"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen loading="lazy"></iframe>
+                <button type="button" class="video-facade" data-video-id="gPGxQidFFfQ" data-video-title="Blodet vi delar" aria-label="Spela upp video" data-i18n-aria="ugc.play">
+                    <img src="Images/film-thumbs/blodet-vi-delar-cover.jpg" width="1280" height="720" alt="" loading="lazy">
+                    <span class="video-play-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </span>
+                </button>
             </div>
         </section>
 
@@ -142,7 +145,7 @@
         <section class="section" id="stranden">
             <div class="project-header">
                 <h2 class="section-title">Stranden</h2>
-                <a class="btn btn-primary" href="stranden.html" data-i18n="film.cta.bts">Bakom kulisserna</a>
+                <a class="btn btn-primary" href="stranden.html" data-i18n="film.cta.bts" data-i18n-aria="film.cta.bts.stranden" aria-label="Bakom kulisserna – Stranden">Bakom kulisserna</a>
             </div>
             <p class="project-lead" data-i18n="stranden.blurb">En kommande kortfilm i regi av Sixten Degerman.</p>
         </section>
