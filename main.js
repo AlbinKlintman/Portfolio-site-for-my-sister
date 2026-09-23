@@ -28,6 +28,7 @@ const translations = {
 
     "model.eyebrow": { sv: "Portfolio", en: "Portfolio" },
     "model.title": { sv: "Modell", en: "Model" },
+    "model.cta.scouted": { sv: "Se modellprofil", en: "View model profile" },
     "model.order-note": {
         sv: "Kategorierna är sorterade efter datum, senaste överst",
         en: "Categories are sorted by date, newest first"
