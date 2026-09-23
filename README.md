@@ -36,7 +36,6 @@ A multi-page portfolio website for Olivia Klintman — dancer, actor, UGC creato
 ├── index.html          # Home
 ├── film.html            # Film page — click-to-play video embed + full crew credits
 ├── blodet-vi-delar.html  # Behind-the-scenes photo gallery + lightbox for "Blodet vi delar"
-├── gallery.html          # Redirect stub → blodet-vi-delar.html (kept for old links/bookmarks)
 ├── model.html            # Modeling portfolio — Model House Sweden, Johannes Hjort, Open Call
 ├── stranden.html          # Behind-the-scenes gallery for the upcoming short film "Stranden"
 ├── ugc.html               # UGC creator page — embedded TikTok videos by brand
